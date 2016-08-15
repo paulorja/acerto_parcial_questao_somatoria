@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content: "text/html" charset="UTF-8" http-equiv="Content-Type">
+    <title>Cálculo de Acerto Parcial de Questão Somatória</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1>Cálculo de Acerto Parcial de Questão Somatória</h1>
+      <form action='javascript:on_form_submit()'>
+        <div class="form-group">
+          <label for="np">Número de proposições da questão</label>
+          <input type="number" class="form-control" id="np" required>
+        </div>
+        <div class="form-group">
+          <label for="ntpc">Número total de proposições corretas</label>
+          <input type="number" class="form-control" id="ntpc" required>
+        </div>
+        <div class="form-group">
+          <label for="npc">Número de proposições corretas consideradas corretas pelo candidato</label>
+          <input type="number" class="form-control" id="npc" required>
+        </div>
+        <div class="form-group">
+          <label for="npi">Número de proposições incorretas consideradas corretas pelo candidato</label>
+          <input type="number" class="form-control" id="npi" required>
+        </div>
+  
+        <button type="submit" class="btn btn-success btn-lg">Calcular</button>
+        <button type="reset" class="btn btn-warning btn-lg">Limpar Campos</button>
+      </form>
+    </div>
+    
+    <script type="text/javascript">
+      var input_np = $('#np');
+      var input_ntpc = $('#ntpc');
+      var input_npc = $('#npc');
+      var input_npi = $('#npi');
 
+      function on_form_submit() {
+        alert('Pontuação: '+acerto_parcial());
+      }
+
+      function acerto_parcial() {
+        var np   = input_np.val();        
+        var ntpc = input_ntpc.val();        
+        var npc  = input_npc.val();        
+        var npi  = input_npi.val();
+
+        var total = (np - (ntpc - (npc - npi))) / np
+
+        return total;
+      }
+
+      input_np.change(function() {
+        input_ntpc.attr('max', input_np.val());
+        input_npc.attr('max', input_np.val());
+        input_npi.attr('max', input_np.val());
+      });
+
+      input_npc.change(function() {
+        input_npi.attr('max', input_np.val() - input_npc.val());
+      });
+
+    </script>
+  </body>
+</html>

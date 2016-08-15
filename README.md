@@ -1,4 +1,4 @@
-# acerto_parcial_questao_somatoria
+# Cálculo de Acerto Parcial de Questão Somatória
 
 Link:
 https://cdn.rawgit.com/paulorja/acerto_parcial_questao_somatoria/master/index.html
